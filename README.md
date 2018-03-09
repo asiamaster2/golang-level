@@ -27,6 +27,7 @@ For creating instance by using WEB API with Golang.
         $ sudo gunzip google-cloud-sdk-192.0.0-linux-x86_64.tar.gz 
         $ sudo tar xvf google-cloud-sdk-192.0.0-linux-x86_64.tar 
         $ sudo google-cloud-sdk/install.sh
+        $ sudo gcloud beta auth application-default login
 
 
 
