@@ -1,43 +1,30 @@
-# Welcome to Revel
+# Aaron's first code of Golang
 
-A high-productivity web framework for the [Go language](http://www.golang.org/).
+For checking health of management server.
+For creating instance by using WEB API with Golang.
+
+**Linux distribution : Ubuntu 16.04**
 
 
-### Start the web server:
 
-   revel run myapp
+## How to set up the environment.
 
-### Go to http://localhost:9000/ and you'll see:
+        $ sudo apt-get install golang
 
-    "It works"
+        $ sudo mkdir /home/gohome/
+        $ sudo export GOPATH=/home/gohome/
+        $ sudo echo "export GOPATH=/home/gohome/" >> /etc/rc.local
+        $ sudo go get github.com/revel/revel
+        $ sudo go get github.com/revel/cmd/revel
 
-## Code Layout
+        $ sudo $GOPATH/bin/revel new MyWeb
+        $ sudo echo "$GOPATH/bin/revel run MyWeb" >> /etc/rc.local
 
-The directory structure of a generated Revel application:
-
-    conf/             Configuration directory
-        app.conf      Main app configuration file
-        routes        Routes definition file
-
-    app/              App sources
-        init.go       Interceptor registration
-        controllers/  App controllers go here
-        views/        Templates directory
-
-    messages/         Message files
-
-    public/           Public static assets
-        css/          CSS files
-        js/           Javascript files
-        images/       Image files
-
-    tests/            Test suites
+        $ sudo reboot
 
 
 ## Help
 
-* The [Getting Started with Revel](http://revel.github.io/tutorial/gettingstarted.html).
-* The [Revel guides](http://revel.github.io/manual/index.html).
-* The [Revel sample apps](http://revel.github.io/examples/index.html).
-* The [API documentation](https://godoc.org/github.com/revel/revel).
+* The [GCE API documentation for creating instance.](https://cloud.google.com/compute/docs/reference/rest/beta/instances/insert).
+* The [How to code "hello world" with Golang.](https://revel.github.io/tutorial/firstapp.html).
 
