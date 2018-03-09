@@ -20,11 +20,30 @@
 </div>
 
 <div class="container">
+ <div class="row">
+  <div class="span2">
+   <h1>
+    <form action="/v1/instance/create" method="POST">
+      {{with $field := field "username" .}}
+        <h3>Username <input type="text" name="{{$field.Name}}" value="{{$field.Flash}}"/><br/></h3>
+      {{end}}
+      {{with $field := field "password" .}}
+        <h3>Password  <input type="text" name="{{$field.Name}}" value="{{$field.Flash}}"/><br/></h3>
+      {{end}}
+      <input type="submit" value="Login" />
+     </form>
+   </h1>
+  </div>
+ </div>
+</div>
+
+<!-- <div class="container">
   <div class="row">
     <div class="span">
       {{template "flash.html" .}}
     </div>
   </div>
 </div>
+-->
 
 {{template "footer.html" .}}
