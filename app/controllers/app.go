@@ -20,3 +20,8 @@ func (c App) Create(username, password string) revel.Result {
     var resultmsg string = "Please check your credential."
     return c.Render(resultmsg)
 }
+
+func (c App) Healthcheck() revel.Result {
+    return c.Render()
+}
+
