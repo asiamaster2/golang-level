@@ -31,6 +31,17 @@ For creating instance by using WEB API with Golang.
 
 
 
+## Code Layout
+
+    conf/             Configuration directory
+        app.conf      Main app configuration file
+        routes        Routes definition file
+
+    app/              App sources
+        controllers/  App controllers go here
+        views/        Templates directory
+
+
 ## Help
 
 * The [GCE API documentation for creating instance.](https://cloud.google.com/compute/docs/reference/rest/beta/instances/insert).
