@@ -3,6 +3,8 @@ package controllers
 import (
 	"github.com/revel/revel"
 
+	"time"
+
         "fmt"
         "log"
 
@@ -19,8 +21,6 @@ import (
 var projectvar string = "aaron-project-197520"
 var zonevar string = "europe-west3-a"
 var instancevar string = "test111"
-
-
 
 type App struct {
 	*revel.Controller
@@ -121,19 +121,14 @@ func createinstance(username,password string) {
 
 func checkingip() string {
 
-	var tempstatus string = "PENNDING" 
-	for  tempstatus != "RUNNING" {
-        	cmdstatus := "gcloud compute instances list |grep 'test111' |awk '{print $6}'"
-        	outstatus, _ := exec.Command("bash", "-c", cmdstatus).Output()
-		tempstatus = string(outstatus)
-	}
+	time.Sleep(20000 * time.Millisecond)	
 
 	cmdip := "gcloud compute instances list |grep 'test111' |awk '{print $5}'"
 	outip, _ := exec.Command("bash", "-c", cmdip).Output()
 
-	out, _ := exec.Command("ping", string(outip), "-c 3", "-i 3", "-w 10").Output()
+	out, _ := exec.Command("ping", string(outip), "-c 10", "-i 5", "-w 15").Output()
 	if strings.Contains(string(out), "64 bytes from") {
-    		 return string(out)
+    		 return string(outip)
 	} else {
     		 return "error"
 	}
