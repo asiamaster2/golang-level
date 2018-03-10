@@ -17,9 +17,11 @@ import (
 )
 
 
-
+// project ID
 var projectvar string = "aaron-project-197520"
+// zone ID
 var zonevar string = "europe-west3-a"
+// Instance NAME
 var instancevar string = "test111"
 
 type App struct {
@@ -36,22 +38,20 @@ func (c App) Healthcheck() revel.Result {
 
 
 func (c App) Create(username, password string) revel.Result {
-
+  // Checking the credential.
   if username == "hylee" && password == "aaron11!" {
-   
+  	// Creating an instance.
         createinstance(username, password)
- 
+	// return the IP 
         var resultmsg string = checkingip()
-         
-        return c.Render(resultmsg)
   }
-
+  
   var resultmsg string = "Please check your credential."
   return c.Render(resultmsg)
 
 }
 
-
+//creating an instance.
 func createinstance(username,password string) {
 
         ctx := context.Background()
@@ -67,10 +67,10 @@ func createinstance(username,password string) {
         }
 
         // Project ID for this request.
-        project := projectvar // TODO: Update placeholder value.
+        project := projectvar 
 
         // The name of the zone for this request.
-        zone := zonevar // TODO: Update placeholder value.
+        zone := zonevar
 
         rb := &compute.Instance{
                 Name:        instancevar,
@@ -114,18 +114,19 @@ func createinstance(username,password string) {
                 log.Fatal(err)
         }
 
-        // TODO: Change code below to process the `resp` object:
         fmt.Printf("%#v\n", resp)
 }
 
-
+// Checking the IP
 func checkingip() string {
-
+	// wait for the time to create an instance.
 	time.Sleep(20000 * time.Millisecond)	
-
+	
+	// Checking the IP
 	cmdip := "gcloud compute instances list |grep 'test111' |awk '{print $5}'"
 	outip, _ := exec.Command("bash", "-c", cmdip).Output()
 
+	// Ping test
 	out, _ := exec.Command("ping", string(outip), "-c 10", "-i 5", "-w 15").Output()
 	if strings.Contains(string(out), "64 bytes from") {
     		 return string(outip)
