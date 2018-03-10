@@ -44,6 +44,7 @@ For creating instance by using WEB API with Golang.
 
 ## Help
 
-* The [GCE API documentation for creating instance.](https://cloud.google.com/compute/docs/reference/rest/beta/instances/insert).
+* The [GCE API documentation for creating instance.](https://cloud.google.com/compute/docs/reference/rest/v1/instances/insert).
 * The [How to code "hello world" with Golang.](https://revel.github.io/tutorial/firstapp.html).
+* The [GoDOC](https://godoc.org/google.golang.org/api/compute/v1).
 
