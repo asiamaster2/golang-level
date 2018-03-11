@@ -42,8 +42,9 @@ func (c App) Create(username, password string) revel.Result {
   if username == "hylee" && password == "aaron11!" {
   	// Creating an instance.
         createinstance(username, password)
-	// return the IP 
         var resultmsg string = checkingip()
+	createuser(username, password)
+	return c.Render(resultmsg)
   }
   
   var resultmsg string = "Please check your credential."
@@ -133,5 +134,28 @@ func checkingip() string {
 	} else {
     		 return "error"
 	}
+}
+
+
+
+func createuser(username, password string) {
+
+        cmd1 := "gcloud compute --project '" + projectvar + "' ssh --zone '" + zonevar + "' '" + username + "@" + instancevar + "' --command 'sudo adduser " + username + " sudo'"
+        out1, _ := exec.Command("bash", "-c", cmd1).Output()
+        fmt.Printf(string(out1))
+
+        cmd2 := "gcloud compute --project '" + projectvar + "' ssh --zone '" + zonevar + "' '" + username + "@" + instancevar + "' --command 'usermod --password $(openssl passwd '" + password + "') " + username + "'"
+        out2, _ := exec.Command("bash", "-c", cmd2).Output()
+        fmt.Printf(string(out2))
+
+        cmd3 := `gcloud compute --project '` + projectvar + `' ssh --zone '` + zonevar + `' '` + username + `@` + instancevar + `' --command 'sudo sed -i s/PasswordAuthentication\ no/PasswordAuthentication\ yes/ /etc/ssh/sshd_config'`
+        out3, _ := exec.Command("bash", "-c", cmd3).Output()
+        fmt.Printf(string(out3))
+
+        cmd4 := "gcloud compute --project '" + projectvar + "' ssh --zone '" + zonevar + "' '" + username + "@" + instancevar + "' --command 'sudo /etc/init.d/ssh restart'"
+        out4, _ := exec.Command("bash", "-c", cmd4).Output()
+        fmt.Printf(string(out4))
+
+
 }
 
