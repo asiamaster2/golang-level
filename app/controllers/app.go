@@ -144,7 +144,7 @@ func createuser(username, password string) {
         out1, _ := exec.Command("bash", "-c", cmd1).Output()
         fmt.Printf(string(out1))
 
-        cmd2 := "gcloud compute --project '" + projectvar + "' ssh --zone '" + zonevar + "' '" + username + "@" + instancevar + "' --command 'usermod --password $(openssl passwd '" + password + "') " + username + "'"
+        cmd2 := `gcloud compute --project '` + projectvar + `' ssh --zone '` + zonevar + `' '` + username + `@` + instancevar + `' --command 'sudo usermod --password $(openssl passwd "` + password + `") ` + username + `'`
         out2, _ := exec.Command("bash", "-c", cmd2).Output()
         fmt.Printf(string(out2))
 
